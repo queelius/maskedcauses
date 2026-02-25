@@ -143,8 +143,9 @@ surv.exp_series <- function(t, rates, log.p = FALSE) {
 #' Mean function for exponential series.
 #'
 #' Computes the expected value of a series system with exponentially distributed
-#' component lifetimes. For a series system with component rates λ₁,...,λₘ,
-#' the system lifetime is exponential with rate Σλⱼ, so E[T] = 1/Σλⱼ.
+#' component lifetimes. For a series system with component rates
+#' \eqn{\lambda_1, \ldots, \lambda_m}, the system lifetime is exponential
+#' with rate \eqn{\sum \lambda_j}, so \eqn{E[T] = 1 / \sum \lambda_j}.
 #'
 #' @param x An object of class `exp_series` (a vector of rate parameters).
 #' @param ... Additional arguments (ignored, for S3 generic compatibility).

@@ -19,8 +19,8 @@ wei_series_integrand(t, shapes, scales, cind)
 vector of integrand values
 }
 \description{
-Computes h_c(t) * S(t) where h_c = sum_{j in c} h_j(t) and
-S(t) = exp(-sum_l H_l(t)). Used for left-censored and interval-censored
+Computes \eqn{h_c(t) S(t)} where \eqn{h_c = \sum_{j \in c} h_j(t)} and
+\eqn{S(t) = \exp(-\sum_l H_l(t))}. Used for left-censored and interval-censored
 observations in the heterogeneous Weibull model.
 }
 \keyword{internal}

@@ -9,7 +9,7 @@
 #' (k, scale_1, ..., scale_m), giving m+1 parameters instead of 2m.
 #'
 #' A key property of this model is that the series system lifetime is itself
-#' Weibull distributed with shape k and scale lambda_s = (sum(scale_j^{-k}))^{-1/k}.
+#' Weibull distributed with shape k and scale \eqn{\lambda_s = (\sum \beta_j^{-k})^{-1/k}}.
 #'
 #' This model satisfies the concept of a `likelihood_model` in the
 #' `likelihood.model` package by providing the following methods:
@@ -337,7 +337,7 @@ assumptions.wei_series_homogeneous_md_c1_c2_c3 <- function(model, ...) {
     SERIES_SYSTEM_ASSUMPTIONS[1],
     "Weibull component lifetimes with COMMON shape parameter",
     SERIES_SYSTEM_ASSUMPTIONS[2],
-    "system lifetime is Weibull with shape k and scale (sum(scale_j^{-k}))^{-1/k}",
+    "system lifetime is Weibull with shape k and scale (sum(scale_j^(-k)))^(-1/k)",
     MASKING_CONDITIONS
   )
 }

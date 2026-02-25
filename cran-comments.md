@@ -10,7 +10,7 @@ This NOTE is a transient network issue and does not indicate a package problem.
 ## Test environments
 
 * local: Ubuntu 24.04, R 4.3.3
-* GitHub Actions: Ubuntu, macOS, Windows (latest R release)
+* win-builder: R-devel (0 errors, 0 warnings, 2 notes)
 
 ## Downstream dependencies
 

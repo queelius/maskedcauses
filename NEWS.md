@@ -1,3 +1,9 @@
+# maskedcauses 0.9.1
+
+* Fix Unicode characters in roxygen documentation that broke LaTeX PDF manual
+  generation on Windows (replaced with `\eqn{}` markup).
+* Fix unescaped braces in Rd math notation.
+
 # maskedcauses 0.9.0
 
 * Initial CRAN submission.

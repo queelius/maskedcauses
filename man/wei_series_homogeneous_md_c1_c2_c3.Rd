@@ -44,7 +44,7 @@ while retaining individual scale parameters. The parameter vector is
 (k, scale_1, ..., scale_m), giving m+1 parameters instead of 2m.
 
 A key property of this model is that the series system lifetime is itself
-Weibull distributed with shape k and scale lambda_s = (sum(scale_j^{-k}))^{-1/k}.
+Weibull distributed with shape k and scale \eqn{\lambda_s = (\sum \beta_j^{-k})^{-1/k}}.
 
 This model satisfies the concept of a \code{likelihood_model} in the
 \code{likelihood.model} package by providing the following methods:

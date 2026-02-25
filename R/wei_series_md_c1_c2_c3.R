@@ -57,8 +57,8 @@ wei_series_md_c1_c2_c3 <- function(shapes = NULL, scales = NULL, lifetime = "t",
 
 #' Integrand for numerical integration of Weibull series likelihood
 #'
-#' Computes h_c(t) * S(t) where h_c = sum_{j in c} h_j(t) and
-#' S(t) = exp(-sum_l H_l(t)). Used for left-censored and interval-censored
+#' Computes \eqn{h_c(t) S(t)} where \eqn{h_c = \sum_{j \in c} h_j(t)} and
+#' \eqn{S(t) = \exp(-\sum_l H_l(t))}. Used for left-censored and interval-censored
 #' observations in the heterogeneous Weibull model.
 #'
 #' @param t time values (vector, for use with stats::integrate)
