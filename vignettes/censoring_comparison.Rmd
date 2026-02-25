@@ -21,8 +21,7 @@ knitr::opts_chunk$set(
 run_long <- FALSE
 
 library(maskedcauses)
-library(dplyr)
-options(digits = 4)
+old_opts <- options(digits = 4)
 ```
 
 
@@ -650,3 +649,7 @@ continuous monitoring of some units with periodic inspection of others. The
 seamlessly. The key insight is that each observation contributes to the
 likelihood according to its type, and combining them is straightforward---no
 special adjustments are needed beyond specifying the correct $\omega$ column.
+
+```{r cleanup, include=FALSE}
+options(old_opts)
+```

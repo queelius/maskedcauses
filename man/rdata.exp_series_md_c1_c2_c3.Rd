@@ -19,3 +19,10 @@ data frame with columns: t, omega, x1, x2, ..., xm
 Returns a function that generates random masked data from the exponential
 series system DGP at a given parameter value.
 }
+\examples{
+model <- exp_series_md_c1_c2_c3()
+gen <- rdata(model)
+set.seed(42)
+df <- gen(theta = c(0.5, 0.3, 0.2), n = 10, tau = 5, p = 0.5)
+head(df)
+}

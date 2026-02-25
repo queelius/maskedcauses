@@ -18,3 +18,7 @@ integer number of components, or NULL if not determinable
 Returns the number of components m in the series system. If the model was
 constructed without parameter values, returns NULL.
 }
+\examples{
+model <- exp_series_md_c1_c2_c3(rates = c(0.5, 0.3, 0.2))
+ncomponents(model)
+}

@@ -46,10 +46,13 @@
 #' @return likelihood model object with class
 #'   `c("exp_series_md_c1_c2_c3", "series_md", "likelihood_model")`
 #' @examples
-#' # Create model and fit to data using generic dispatch
 #' model <- exp_series_md_c1_c2_c3()
-#' # solver <- fit(model)
-#' # mle <- solver(data, par = c(1, 1, 1))
+#' # Generate data and evaluate log-likelihood
+#' set.seed(123)
+#' gen <- rdata(model)
+#' df <- gen(theta = c(0.5, 0.3, 0.2), n = 50, tau = 10, p = 0.3)
+#' ll <- loglik(model)
+#' ll(df, par = c(0.5, 0.3, 0.2))
 exp_series_md_c1_c2_c3 <- function(rates = NULL, lifetime = "t",
                                    lifetime_upper = "t_upper",
                                    omega = "omega", candset = "x") {
@@ -88,6 +91,12 @@ exp_series_md_c1_c2_c3 <- function(rates = NULL, lifetime = "t",
 #' @importFrom likelihood.model loglik
 #' @method loglik exp_series_md_c1_c2_c3
 #' @export
+#' @examples
+#' model <- exp_series_md_c1_c2_c3()
+#' set.seed(1)
+#' df <- rdata(model)(theta = c(0.5, 0.3, 0.2), n = 30, tau = 10, p = 0.3)
+#' ll <- loglik(model)
+#' ll(df, par = c(0.5, 0.3, 0.2))
 loglik.exp_series_md_c1_c2_c3 <- function(model, ...) {
   defaults <- extract_model_defaults(model)
 
@@ -155,6 +164,12 @@ loglik.exp_series_md_c1_c2_c3 <- function(model, ...) {
 #' @importFrom likelihood.model score
 #' @method score exp_series_md_c1_c2_c3
 #' @export
+#' @examples
+#' model <- exp_series_md_c1_c2_c3()
+#' set.seed(1)
+#' df <- rdata(model)(theta = c(0.5, 0.3, 0.2), n = 30, tau = 10, p = 0.3)
+#' s <- score(model)
+#' s(df, par = c(0.5, 0.3, 0.2))
 score.exp_series_md_c1_c2_c3 <- function(model, ...) {
   defaults <- extract_model_defaults(model)
 
@@ -231,6 +246,12 @@ score.exp_series_md_c1_c2_c3 <- function(model, ...) {
 #' @importFrom likelihood.model hess_loglik
 #' @method hess_loglik exp_series_md_c1_c2_c3
 #' @export
+#' @examples
+#' model <- exp_series_md_c1_c2_c3()
+#' set.seed(1)
+#' df <- rdata(model)(theta = c(0.5, 0.3, 0.2), n = 30, tau = 10, p = 0.3)
+#' H <- hess_loglik(model)
+#' H(df, par = c(0.5, 0.3, 0.2))
 hess_loglik.exp_series_md_c1_c2_c3 <- function(model, ...) {
   defaults <- extract_model_defaults(model)
 
@@ -299,6 +320,8 @@ hess_loglik.exp_series_md_c1_c2_c3 <- function(model, ...) {
 #' @importFrom likelihood.model assumptions
 #' @method assumptions exp_series_md_c1_c2_c3
 #' @export
+#' @examples
+#' assumptions(exp_series_md_c1_c2_c3())
 assumptions.exp_series_md_c1_c2_c3 <- function(model, ...) {
   c(
     SERIES_SYSTEM_ASSUMPTIONS[1],
@@ -322,6 +345,12 @@ assumptions.exp_series_md_c1_c2_c3 <- function(model, ...) {
 #' @importFrom stats rexp runif
 #' @method rdata exp_series_md_c1_c2_c3
 #' @export
+#' @examples
+#' model <- exp_series_md_c1_c2_c3()
+#' gen <- rdata(model)
+#' set.seed(42)
+#' df <- gen(theta = c(0.5, 0.3, 0.2), n = 10, tau = 5, p = 0.5)
+#' head(df)
 rdata.exp_series_md_c1_c2_c3 <- function(model, ...) {
   defaults <- extract_model_defaults(model)
 

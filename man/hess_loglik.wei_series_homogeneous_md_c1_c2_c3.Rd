@@ -27,3 +27,13 @@ Returns the Hessian (second derivative matrix) of the log-likelihood for a
 Weibull series system with homogeneous shape. Computed numerically via the
 Jacobian of the score.
 }
+\examples{
+\donttest{
+model <- wei_series_homogeneous_md_c1_c2_c3()
+set.seed(1)
+theta <- c(1.2, 1000, 900, 850)
+df <- rdata(model)(theta = theta, n = 30, tau = 500, p = 0.3)
+H <- hess_loglik(model)
+H(df, par = theta)
+}
+}

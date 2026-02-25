@@ -21,8 +21,7 @@ knitr::opts_chunk$set(
 run_long <- FALSE
 
 library(maskedcauses)
-library(dplyr)
-options(digits = 4)
+old_opts <- options(digits = 4)
 ```
 
 
@@ -622,3 +621,7 @@ machine precision, confirming that the two parameterizations yield identical
 inference at $k = 1$. The shape score $\partial\ell/\partial k$ is nonzero at
 the true parameter (the score is zero only at the MLE, not at the DGP truth
 for any finite sample).
+
+```{r cleanup, include=FALSE}
+options(old_opts)
+```

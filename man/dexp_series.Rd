@@ -13,6 +13,14 @@ dexp_series(t, rates, log = FALSE)
 
 \item{log}{return the log of the pdf}
 }
+\value{
+Density values for the exponential series distribution.
+}
 \description{
 pdf for exponential series.
+}
+\examples{
+rates <- c(0.5, 0.3, 0.2)
+dexp_series(1.0, rates)
+dexp_series(c(0.5, 1.0, 2.0), rates, log = TRUE)
 }

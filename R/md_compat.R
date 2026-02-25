@@ -24,6 +24,9 @@ md_decode_matrix <- function(df, var) {
 #' @param var character prefix for the column names
 #' @return a data frame with named columns
 #' @export
+#' @examples
+#' mat <- matrix(1:6, nrow = 2, ncol = 3)
+#' md_encode_matrix(mat, "x")
 md_encode_matrix <- function(mat, var) {
   stopifnot(is.matrix(mat))
   df <- as.data.frame(mat)
@@ -57,6 +60,11 @@ md_mark_latent <- function(md, vars) {
 #' @param drop_set if TRUE, remove the original Boolean columns (default FALSE)
 #' @return data frame with character set column added
 #' @export
+#' @examples
+#' df <- data.frame(x1 = c(TRUE, FALSE, TRUE),
+#'                  x2 = c(TRUE, TRUE, FALSE),
+#'                  x3 = c(FALSE, TRUE, TRUE))
+#' md_boolean_matrix_to_charsets(df)
 md_boolean_matrix_to_charsets <- function(df, setvar = "x", cname = NULL,
                                           drop_set = FALSE) {
   if (is.null(cname)) cname <- setvar

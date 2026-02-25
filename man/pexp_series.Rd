@@ -22,3 +22,8 @@ The cumulative probabilities evaluated at the specified lifetimes.
 \description{
 Cumulative distribution function for exponential series.
 }
+\examples{
+rates <- c(0.5, 0.3, 0.2)
+pexp_series(1.0, rates)
+pexp_series(c(0.5, 1.0, 2.0), rates)
+}

@@ -17,3 +17,6 @@ character vector of assumptions
 \description{
 Returns the assumptions made by this likelihood model.
 }
+\examples{
+assumptions(exp_series_md_c1_c2_c3())
+}

@@ -17,3 +17,7 @@ a data frame with named columns
 \description{
 Converts a matrix to a data frame with columns named \verb{var1, var2, ...}.
 }
+\examples{
+mat <- matrix(1:6, nrow = 2, ncol = 3)
+md_encode_matrix(mat, "x")
+}

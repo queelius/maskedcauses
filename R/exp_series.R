@@ -4,9 +4,16 @@
 #' Functions include simulation, pdf, cdf, quantile, and other related
 #' functions for the Exponential series distribution.
 #' 
-#' @name Exponential series system
-#' @author Alex Towell
-#' @keywords exponential, distribution, series, statistics
+#' Exponential series system distribution
+#'
+#' Density, distribution, quantile, random generation, hazard, survival,
+#' and mean functions for the exponential series system distribution.
+#' A series system of m independent exponential components with rates
+#' \eqn{\lambda_1, \ldots, \lambda_m} has an exponential system lifetime
+#' with rate \eqn{\lambda = \sum \lambda_j}.
+#'
+#' @name Exponential-series-system
+#' @keywords internal
 NULL
 
 #' Quantile function for exponential series.
@@ -19,6 +26,10 @@ NULL
 #' @return Quantiles corresponding to the given probabilities `p`.
 #' @importFrom stats qexp
 #' @export
+#' @examples
+#' rates <- c(0.5, 0.3, 0.2)
+#' qexp_series(0.5, rates)
+#' qexp_series(c(0.25, 0.5, 0.75), rates)
 qexp_series <- function(p, rates, lower.tail = TRUE, log.p = FALSE) {
     qexp(p, sum(rates), lower.tail, log.p)
 }
@@ -39,6 +50,10 @@ qexp_series <- function(p, rates, lower.tail = TRUE, log.p = FALSE) {
 #'         in columns 2 through m+1.
 #' @importFrom stats rexp
 #' @export
+#' @examples
+#' set.seed(123)
+#' rexp_series(5, rates = c(0.5, 0.3, 0.2))
+#' rexp_series(3, rates = c(0.5, 0.3, 0.2), keep_latent = TRUE)
 rexp_series <- function(n, rates, keep_latent = FALSE) {
 
     m <- length(rates)
@@ -46,7 +61,7 @@ rexp_series <- function(n, rates, keep_latent = FALSE) {
     data <- NULL
     if (keep_latent) {
         data <- matrix(NA, nrow = n, ncol = m)
-        for (j in 1:m) {
+        for (j in seq_len(m)) {
             data[, j] <- rexp(n, rates[j])
         }
         data <- cbind(apply(data, 1, min), data)
@@ -61,8 +76,13 @@ rexp_series <- function(n, rates, keep_latent = FALSE) {
 #' @param t series system lifetime
 #' @param rates rate parameters for exponential component lifetimes
 #' @param log return the log of the pdf
+#' @return Density values for the exponential series distribution.
 #' @importFrom stats dexp
 #' @export
+#' @examples
+#' rates <- c(0.5, 0.3, 0.2)
+#' dexp_series(1.0, rates)
+#' dexp_series(c(0.5, 1.0, 2.0), rates, log = TRUE)
 dexp_series <- function(t, rates, log = FALSE) {
     dexp(t, sum(rates), log)
 }
@@ -77,6 +97,10 @@ dexp_series <- function(t, rates, log = FALSE) {
 #' @return The cumulative probabilities evaluated at the specified lifetimes.
 #' @importFrom stats pexp
 #' @export
+#' @examples
+#' rates <- c(0.5, 0.3, 0.2)
+#' pexp_series(1.0, rates)
+#' pexp_series(c(0.5, 1.0, 2.0), rates)
 pexp_series <- function(t, rates, lower.tail = TRUE, log.p = FALSE) {
     pexp(t, sum(rates), lower.tail, log.p)
 }
@@ -88,6 +112,10 @@ pexp_series <- function(t, rates, lower.tail = TRUE, log.p = FALSE) {
 #' @param log.p Logical; if TRUE, return the log of the hazard function.
 #' @return The hazard function evaluated at the specified lifetimes.
 #' @export
+#' @examples
+#' rates <- c(0.5, 0.3, 0.2)
+#' hazard_exp_series(1.0, rates)
+#' hazard_exp_series(c(0.5, 1.0), rates, log.p = TRUE)
 hazard_exp_series <- function(t, rates, log.p = FALSE) {
     ifelse(log.p,
         ifelse(t < 0, -Inf, log(sum(rates))),
@@ -104,6 +132,10 @@ hazard_exp_series <- function(t, rates, log.p = FALSE) {
 #' @return The survival function evaluated at the specified lifetimes.
 #' @importFrom stats pexp
 #' @export
+#' @examples
+#' rates <- c(0.5, 0.3, 0.2)
+#' surv.exp_series(1.0, rates)
+#' surv.exp_series(c(0.5, 1.0, 2.0), rates)
 surv.exp_series <- function(t, rates, log.p = FALSE) {
     pexp(t, sum(rates), lower.tail = FALSE, log.p = log.p)
 }
@@ -119,6 +151,9 @@ surv.exp_series <- function(t, rates, log.p = FALSE) {
 #' @return The mean of the exponential series distribution (1/sum of rates).
 #' @method mean exp_series
 #' @export
+#' @examples
+#' rates <- structure(c(0.5, 0.3, 0.2), class = "exp_series")
+#' mean(rates)
 mean.exp_series <- function(x, ...) {
     1 / sum(x)
 }

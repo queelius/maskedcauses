@@ -31,3 +31,10 @@ sets that satisfy conditions C1, C2, and C3.
 All four observation types (exact, right, left, interval) have closed-form
 score contributions.
 }
+\examples{
+model <- exp_series_md_c1_c2_c3()
+set.seed(1)
+df <- rdata(model)(theta = c(0.5, 0.3, 0.2), n = 30, tau = 10, p = 0.3)
+s <- score(model)
+s(df, par = c(0.5, 0.3, 0.2))
+}

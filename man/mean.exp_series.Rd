@@ -19,3 +19,7 @@ Computes the expected value of a series system with exponentially distributed
 component lifetimes. For a series system with component rates λ₁,...,λₘ,
 the system lifetime is exponential with rate Σλⱼ, so E\link{T} = 1/Σλⱼ.
 }
+\examples{
+rates <- structure(c(0.5, 0.3, 0.2), class = "exp_series")
+mean(rates)
+}

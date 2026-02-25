@@ -22,3 +22,8 @@ Quantiles corresponding to the given probabilities \code{p}.
 \description{
 Quantile function for exponential series.
 }
+\examples{
+rates <- c(0.5, 0.3, 0.2)
+qexp_series(0.5, rates)
+qexp_series(c(0.25, 0.5, 0.75), rates)
+}

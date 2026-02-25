@@ -34,3 +34,8 @@ Generates right-censored system failure times and right-censoring
 indicators for a series system with the given data frame of
 component lifetimes.
 }
+\examples{
+mat <- matrix(rexp(9, rate = 0.5), nrow = 3, ncol = 3)
+df <- md_encode_matrix(mat, "t")
+md_series_lifetime_right_censoring(df, tau = 5)
+}

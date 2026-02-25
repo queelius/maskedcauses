@@ -19,3 +19,8 @@ The hazard function evaluated at the specified lifetimes.
 \description{
 Hazard function for exponential series.
 }
+\examples{
+rates <- c(0.5, 0.3, 0.2)
+hazard_exp_series(1.0, rates)
+hazard_exp_series(c(0.5, 1.0), rates, log.p = TRUE)
+}

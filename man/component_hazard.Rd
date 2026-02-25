@@ -22,3 +22,8 @@ Returns a closure computing the hazard function h_j(t; theta) for the j-th
 component. The returned function takes the full parameter vector \code{par} and
 extracts the relevant component parameters internally.
 }
+\examples{
+model <- exp_series_md_c1_c2_c3()
+h1 <- component_hazard(model, j = 1)
+h1(t = 1.0, par = c(0.5, 0.3, 0.2))
+}

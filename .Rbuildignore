@@ -17,3 +17,5 @@
 ^simulations$
 ^\.lintr$
 ^\.claude$
+^\.papermill\.md$
+^cran-comments\.md$

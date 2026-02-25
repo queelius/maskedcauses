@@ -30,6 +30,10 @@ if TRUE, then the system lifetime is right-censored, otherwise it is
 observed. If NULL, then no right-censoring is assumed. Defaults to
 \code{delta}.}
 }
+\value{
+Data frame with added candidate set probability columns
+(e.g., \code{q1, q2, ..., qm}).
+}
 \description{
 Bernoulli candidate set model is a particular type of \emph{uninformed} model.
 Note that we do not generate candidate sets with this function. See
@@ -44,4 +48,13 @@ may be different for each system, but it is assumed to be the same for
 each component within a system, so \code{p} can be a vector such that the
 length of \code{p} is the number of systems in the data set (with recycling
 if necessary).
+}
+\examples{
+# Generate component lifetimes and system data
+mat <- matrix(rexp(9, rate = rep(c(0.5, 0.3, 0.2), each = 3)),
+              nrow = 3, ncol = 3)
+df <- md_encode_matrix(mat, "t")
+df$t <- apply(mat, 1, min)
+df$delta <- TRUE
+md_bernoulli_cand_c1_c2_c3(df, p = 0.5)
 }

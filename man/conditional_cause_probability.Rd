@@ -29,3 +29,8 @@ paper, this equals h_j(t; theta) / sum_l h_l(t; theta).
 component hazard ratios (Theorem 6)
 
 }}
+\examples{
+model <- exp_series_md_c1_c2_c3()
+ccp <- conditional_cause_probability(model)
+ccp(t = c(1, 2), par = c(0.5, 0.3, 0.2))
+}

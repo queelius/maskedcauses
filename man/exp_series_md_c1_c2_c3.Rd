@@ -67,8 +67,11 @@ As a special case, this model also includes exact component cause of failure
 data where the candidate set is a singleton.
 }
 \examples{
-# Create model and fit to data using generic dispatch
 model <- exp_series_md_c1_c2_c3()
-# solver <- fit(model)
-# mle <- solver(data, par = c(1, 1, 1))
+# Generate data and evaluate log-likelihood
+set.seed(123)
+gen <- rdata(model)
+df <- gen(theta = c(0.5, 0.3, 0.2), n = 50, tau = 10, p = 0.3)
+ll <- loglik(model)
+ll(df, par = c(0.5, 0.3, 0.2))
 }

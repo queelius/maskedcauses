@@ -13,8 +13,11 @@
 #' @param right_censoring_indicator right-censoring indicator variable, defaults
 #'                                  to `delta`
 #' @return (masked) data frame with masked data as described in the paper
-#' @importFrom dplyr %>%
 #' @export
+#' @examples
+#' mat <- matrix(rexp(9, rate = 0.5), nrow = 3, ncol = 3)
+#' df <- md_encode_matrix(mat, "t")
+#' md_series_lifetime_right_censoring(df, tau = 5)
 md_series_lifetime_right_censoring <- function(
     df,
     tau = Inf,
@@ -30,5 +33,5 @@ md_series_lifetime_right_censoring <- function(
     s <- apply(t, 1, min)
     df[, lifetime] <- ifelse(s < tau, s, tau)
     df[, right_censoring_indicator] <- s < tau
-    df %>% md_mark_latent(paste0(comp, 1:(ncol(t))))
+    md_mark_latent(df, paste0(comp, seq_len(ncol(t))))
 }

@@ -15,3 +15,9 @@ A function that computes the cumulative hazard at time t
 \description{
 Creates a cumulative hazard function from a hazard function by integrating.
 }
+\examples{
+# Exponential hazard h(t) = lambda
+haz <- function(t, ...) rep(0.5, length(t))
+H <- cum_haz(haz)
+H(2)  # Should be 1.0 (0.5 * 2)
+}

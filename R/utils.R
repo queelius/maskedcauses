@@ -228,6 +228,11 @@ generate_masked_series_data <- function(comp_lifetimes, n, m, tau, p,
 #' @return A function that computes the cumulative hazard at time t
 #' @importFrom stats integrate
 #' @export
+#' @examples
+#' # Exponential hazard h(t) = lambda
+#' haz <- function(t, ...) rep(0.5, length(t))
+#' H <- cum_haz(haz)
+#' H(2)  # Should be 1.0 (0.5 * 2)
 cum_haz <- function(haz) {
   function(t, ...) {
     integrate(haz, lower = 0, upper = t, ...)$value

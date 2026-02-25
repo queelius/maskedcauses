@@ -25,3 +25,8 @@ in columns 2 through m+1.
 \description{
 Generates random variates from an exponential series distribution.
 }
+\examples{
+set.seed(123)
+rexp_series(5, rates = c(0.5, 0.3, 0.2))
+rexp_series(3, rates = c(0.5, 0.3, 0.2), keep_latent = TRUE)
+}

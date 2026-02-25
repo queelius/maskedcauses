@@ -102,6 +102,15 @@ wei_series_integrand <- function(t, shapes, scales, cind) {
 #' @importFrom stats integrate
 #' @method loglik wei_series_md_c1_c2_c3
 #' @export
+#' @examples
+#' \donttest{
+#' model <- wei_series_md_c1_c2_c3()
+#' set.seed(1)
+#' theta <- c(1.2, 1000, 0.8, 900)
+#' df <- rdata(model)(theta = theta, n = 30, tau = 500, p = 0.3)
+#' ll <- loglik(model)
+#' ll(df, par = theta)
+#' }
 loglik.wei_series_md_c1_c2_c3 <- function(model, ...) {
   defaults <- extract_model_defaults(model)
 
@@ -195,6 +204,15 @@ loglik.wei_series_md_c1_c2_c3 <- function(model, ...) {
 #' @importFrom numDeriv grad
 #' @method score wei_series_md_c1_c2_c3
 #' @export
+#' @examples
+#' \donttest{
+#' model <- wei_series_md_c1_c2_c3()
+#' set.seed(1)
+#' theta <- c(1.2, 1000, 0.8, 900)
+#' df <- rdata(model)(theta = theta, n = 30, tau = 500, p = 0.3)
+#' s <- score(model)
+#' s(df, par = theta)
+#' }
 score.wei_series_md_c1_c2_c3 <- function(model, ...) {
   defaults <- extract_model_defaults(model)
 
@@ -323,6 +341,15 @@ score.wei_series_md_c1_c2_c3 <- function(model, ...) {
 #' @importFrom likelihood.model hess_loglik
 #' @method hess_loglik wei_series_md_c1_c2_c3
 #' @export
+#' @examples
+#' \donttest{
+#' model <- wei_series_md_c1_c2_c3()
+#' set.seed(1)
+#' theta <- c(1.2, 1000, 0.8, 900)
+#' df <- rdata(model)(theta = theta, n = 30, tau = 500, p = 0.3)
+#' H <- hess_loglik(model)
+#' H(df, par = theta)
+#' }
 hess_loglik.wei_series_md_c1_c2_c3 <- function(model, ...) {
   score_fn <- score.wei_series_md_c1_c2_c3(model, ...)
   make_numeric_hessian(score_fn, model)
@@ -339,6 +366,8 @@ hess_loglik.wei_series_md_c1_c2_c3 <- function(model, ...) {
 #' @importFrom likelihood.model assumptions
 #' @method assumptions wei_series_md_c1_c2_c3
 #' @export
+#' @examples
+#' assumptions(wei_series_md_c1_c2_c3())
 assumptions.wei_series_md_c1_c2_c3 <- function(model, ...) {
   c(
     SERIES_SYSTEM_ASSUMPTIONS[1],
@@ -362,6 +391,13 @@ assumptions.wei_series_md_c1_c2_c3 <- function(model, ...) {
 #' @importFrom stats rweibull runif
 #' @method rdata wei_series_md_c1_c2_c3
 #' @export
+#' @examples
+#' model <- wei_series_md_c1_c2_c3()
+#' gen <- rdata(model)
+#' set.seed(42)
+#' # theta: (shape1, scale1, shape2, scale2)
+#' df <- gen(theta = c(1.2, 1000, 0.8, 900), n = 10, tau = 500, p = 0.5)
+#' head(df)
 rdata.wei_series_md_c1_c2_c3 <- function(model, ...) {
   defaults <- extract_model_defaults(model)
 

@@ -25,8 +25,17 @@
 #'     if TRUE, then the system lifetime is right-censored, otherwise it is
 #'     observed. If NULL, then no right-censoring is assumed. Defaults to
 #'     `delta`.
-#' @importFrom dplyr %>% bind_cols
+#' @return Data frame with added candidate set probability columns
+#'   (e.g., \code{q1, q2, ..., qm}).
 #' @export
+#' @examples
+#' # Generate component lifetimes and system data
+#' mat <- matrix(rexp(9, rate = rep(c(0.5, 0.3, 0.2), each = 3)),
+#'               nrow = 3, ncol = 3)
+#' df <- md_encode_matrix(mat, "t")
+#' df$t <- apply(mat, 1, min)
+#' df$delta <- TRUE
+#' md_bernoulli_cand_c1_c2_c3(df, p = 0.5)
 md_bernoulli_cand_c1_c2_c3 <- function(
     df,
     p,
@@ -56,9 +65,9 @@ md_bernoulli_cand_c1_c2_c3 <- function(
     }
 
     # remove in case it already has columns for q1,...,qm
-    df[ , paste0(prob, 1:m)] <- NULL
-    df %>% bind_cols(md_encode_matrix(Q, prob)) %>%
-           md_mark_latent(paste0(prob, 1:m))
+    df[ , paste0(prob, seq_len(m))] <- NULL
+    md_mark_latent(cbind(df, md_encode_matrix(Q, prob)),
+                   paste0(prob, seq_len(m)))
 }
 
 #' Sample candidate sets for systems with unobserved components.
@@ -73,9 +82,20 @@ md_bernoulli_cand_c1_c2_c3 <- function(
 #'             `q`, e.g., `q1, q2, q3`.
 #' @param candset column prefix for candidate sets (as Boolean matrix),
 #'                defaults to `x`, e.g., `x1, x2, x3`.
-#' @importFrom dplyr %>% bind_cols
+#' @return Data frame with added Boolean candidate set columns
+#'   (e.g., \code{x1, x2, ..., xm}).
 #' @importFrom stats runif
 #' @export
+#' @examples
+#' # Generate component lifetimes
+#' set.seed(42)
+#' mat <- matrix(rexp(9, rate = rep(c(0.5, 0.3, 0.2), each = 3)),
+#'               nrow = 3, ncol = 3)
+#' df <- md_encode_matrix(mat, "t")
+#' df$t <- apply(mat, 1, min)
+#' df$delta <- TRUE
+#' df <- md_bernoulli_cand_c1_c2_c3(df, p = 0.5)
+#' md_cand_sampler(df)
 md_cand_sampler <- function(df, prob = "q", candset = "x") {
 
     if (!is.data.frame(df)) {
@@ -94,6 +114,6 @@ md_cand_sampler <- function(df, prob = "q", candset = "x") {
     }
 
     X <- matrix(runif(n * m), nrow = n, ncol = m) <= Q
-    df %>% bind_cols(md_encode_matrix(X, candset))
+    cbind(df, md_encode_matrix(X, candset))
 }
 

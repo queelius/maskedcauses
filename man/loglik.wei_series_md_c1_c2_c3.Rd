@@ -32,3 +32,13 @@ Supports four observation types. Left-censored and interval-censored
 observations require numerical integration (via stats::integrate) because
 heterogeneous shapes prevent a closed-form solution.
 }
+\examples{
+\donttest{
+model <- wei_series_md_c1_c2_c3()
+set.seed(1)
+theta <- c(1.2, 1000, 0.8, 900)
+df <- rdata(model)(theta = theta, n = 30, tau = 500, p = 0.3)
+ll <- loglik(model)
+ll(df, par = theta)
+}
+}

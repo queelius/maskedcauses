@@ -32,3 +32,8 @@ The default method uses Monte Carlo integration via \code{\link[=rdata]{rdata()}
 integration (Theorem 5)
 
 }}
+\examples{
+model <- exp_series_md_c1_c2_c3()
+cp <- cause_probability(model)
+cp(par = c(0.5, 0.3, 0.2))
+}

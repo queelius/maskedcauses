@@ -32,3 +32,13 @@ Uses a hybrid approach: analytical score for exact and right-censored
 observations, numerical gradient (via numDeriv) for left-censored and
 interval-censored observations.
 }
+\examples{
+\donttest{
+model <- wei_series_homogeneous_md_c1_c2_c3()
+set.seed(1)
+theta <- c(1.2, 1000, 900, 850)
+df <- rdata(model)(theta = theta, n = 30, tau = 500, p = 0.3)
+s <- score(model)
+s(df, par = theta)
+}
+}

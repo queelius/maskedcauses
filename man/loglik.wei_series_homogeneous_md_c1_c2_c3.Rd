@@ -31,3 +31,14 @@ for masked data with candidate sets that satisfy conditions C1, C2, and C3.
 Supports four observation types. Left-censored and interval-censored have
 closed-form likelihood contributions because all shapes are equal.
 }
+\examples{
+\donttest{
+model <- wei_series_homogeneous_md_c1_c2_c3()
+set.seed(1)
+# theta: (shape, scale1, scale2, scale3)
+theta <- c(1.2, 1000, 900, 850)
+df <- rdata(model)(theta = theta, n = 30, tau = 500, p = 0.3)
+ll <- loglik(model)
+ll(df, par = theta)
+}
+}

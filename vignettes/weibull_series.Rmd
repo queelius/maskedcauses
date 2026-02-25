@@ -22,8 +22,7 @@ knitr::opts_chunk$set(
 run_long <- FALSE
 
 library(maskedcauses)
-library(dplyr)
-options(digits = 4)
+old_opts <- options(digits = 4)
 ```
 
 
@@ -617,3 +616,7 @@ following properties of the heterogeneous Weibull MLE:
   achieves $\sim 82\%$ convergence compared to $< 10\%$ with unconstrained
   Nelder-Mead. The positivity constraints ($k_j, \beta_j > 0$) are natural
   for this problem and dramatically improve numerical stability.
+
+```{r cleanup, include=FALSE}
+options(old_opts)
+```

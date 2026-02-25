@@ -22,3 +22,9 @@ data frame with character set column added
 Replaces Boolean matrix columns (e.g., \verb{x1, x2, x3}) with a single
 character column showing set notation like \verb{\{1, 3\}}.
 }
+\examples{
+df <- data.frame(x1 = c(TRUE, FALSE, TRUE),
+                 x2 = c(TRUE, TRUE, FALSE),
+                 x3 = c(FALSE, TRUE, TRUE))
+md_boolean_matrix_to_charsets(df)
+}

@@ -21,8 +21,7 @@ knitr::opts_chunk$set(
 run_long <- FALSE
 
 library(maskedcauses)
-library(dplyr)
-options(digits = 4)
+old_opts <- options(digits = 4)
 ```
 
 
@@ -1067,3 +1066,7 @@ fitted model and refitting. This is more computationally expensive but
 avoids reliance on large-sample normality approximations, which can be
 inaccurate when the sample size is small or the likelihood surface is
 asymmetric.
+
+```{r cleanup, include=FALSE}
+options(old_opts)
+```

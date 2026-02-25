@@ -19,3 +19,11 @@ data frame with columns: t, omega, x1, x2, ..., xm
 Returns a function that generates random masked data from the Weibull
 series system DGP at a given parameter value.
 }
+\examples{
+model <- wei_series_md_c1_c2_c3()
+gen <- rdata(model)
+set.seed(42)
+# theta: (shape1, scale1, shape2, scale2)
+df <- gen(theta = c(1.2, 1000, 0.8, 900), n = 10, tau = 500, p = 0.5)
+head(df)
+}

@@ -7,6 +7,9 @@
 #' @param ... additional arguments (currently ignored)
 #' @return integer number of components, or NULL if not determinable
 #' @export
+#' @examples
+#' model <- exp_series_md_c1_c2_c3(rates = c(0.5, 0.3, 0.2))
+#' ncomponents(model)
 ncomponents <- function(model, ...) UseMethod("ncomponents")
 
 
@@ -22,6 +25,10 @@ ncomponents <- function(model, ...) UseMethod("ncomponents")
 #'   covariates for proportional hazards extensions)
 #' @return a function with signature `function(t, par, ...)` computing h_j(t)
 #' @export
+#' @examples
+#' model <- exp_series_md_c1_c2_c3()
+#' h1 <- component_hazard(model, j = 1)
+#' h1(t = 1.0, par = c(0.5, 0.3, 0.2))
 component_hazard <- function(model, j, ...) UseMethod("component_hazard")
 
 
@@ -36,6 +43,10 @@ component_hazard <- function(model, j, ...) UseMethod("component_hazard")
 #' @return a function with signature `function(t, par, ...)` returning an
 #'   n x m matrix where n = length(t) and column j gives P(K=j | T=t, theta)
 #' @export
+#' @examples
+#' model <- exp_series_md_c1_c2_c3()
+#' ccp <- conditional_cause_probability(model)
+#' ccp(t = c(1, 2), par = c(0.5, 0.3, 0.2))
 conditional_cause_probability <- function(model, ...) {
   UseMethod("conditional_cause_probability")
 }
@@ -54,6 +65,10 @@ conditional_cause_probability <- function(model, ...) {
 #' @return a function with signature `function(par, ...)` returning an m-vector
 #'   where element j gives P(K=j | theta)
 #' @export
+#' @examples
+#' model <- exp_series_md_c1_c2_c3()
+#' cp <- cause_probability(model)
+#' cp(par = c(0.5, 0.3, 0.2))
 cause_probability <- function(model, ...) UseMethod("cause_probability")
 
 
