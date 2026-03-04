@@ -19,3 +19,4 @@
 ^\.claude$
 ^\.papermill\.md$
 ^cran-comments\.md$
+^CRAN-SUBMISSION$

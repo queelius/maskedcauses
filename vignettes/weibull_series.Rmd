@@ -572,7 +572,8 @@ knitr::kable(coverage_df, digits = 4,
 ### Sampling distribution
 
 ```{r mc-sampling-dist, fig.width=8, fig.height=6}
-par(mfrow = c(2, 3), mar = c(4, 4, 2, 1))
+oldpar <- par(mfrow = c(2, 3), mar = c(4, 4, 2, 1))
+on.exit(par(oldpar))
 for (j in seq_len(2 * m_mc)) {
   hist(est_valid[, j], breaks = 20, probability = TRUE,
        main = par_names_mc[j],

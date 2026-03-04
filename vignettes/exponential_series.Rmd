@@ -792,7 +792,8 @@ knitr::kable(coverage_df, digits = 4,
 
 ```{r sampling-dist-plot, fig.width=8, fig.height=4}
 # Plot sampling distributions
-par(mfrow = c(1, min(m, 5)), mar = c(4, 4, 2, 1))
+oldpar <- par(mfrow = c(1, min(m, 5)), mar = c(4, 4, 2, 1))
+on.exit(par(oldpar))
 for (j in 1:min(m, 5)) {
     hist(est_valid[, j], breaks = 20, probability = TRUE,
          main = paste0("Component ", j),
@@ -904,7 +905,8 @@ for (p_idx in seq_along(p_values)) {
 bias_mat <- sapply(mask_results, function(x) mean(abs(x$bias)))
 mse_mat <- sapply(mask_results, function(x) mean(x$mse))
 
-par(mfrow = c(1, 2), mar = c(4, 4, 2, 1))
+oldpar <- par(mfrow = c(1, 2), mar = c(4, 4, 2, 1))
+on.exit(par(oldpar))
 
 # Mean absolute bias vs masking probability
 plot(p_values, bias_mat, type = "b", pch = 19, col = "blue",
@@ -1022,7 +1024,8 @@ cens_rates <- sapply(cens_results, function(x) x$cens_rate)
 bias_cens <- sapply(cens_results, function(x) mean(abs(x$bias)))
 mse_cens <- sapply(cens_results, function(x) mean(x$mse))
 
-par(mfrow = c(1, 2), mar = c(4, 4, 2, 1))
+oldpar <- par(mfrow = c(1, 2), mar = c(4, 4, 2, 1))
+on.exit(par(oldpar))
 
 # Mean absolute bias vs censoring rate
 plot(cens_rates * 100, bias_cens, type = "b", pch = 19, col = "blue",

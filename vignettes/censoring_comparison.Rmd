@@ -401,7 +401,8 @@ cfg_labels <- sapply(sim_results, function(x) x$name)
 mse_vals <- sapply(sim_results, function(x) x$mean_mse)
 cov_vals <- sapply(sim_results, function(x) x$mean_coverage)
 
-par(mfrow = c(1, 2), mar = c(7, 4, 3, 1))
+oldpar <- par(mfrow = c(1, 2), mar = c(7, 4, 3, 1))
+on.exit(par(oldpar))
 
 # MSE comparison
 bp <- barplot(mse_vals, names.arg = names(sim_results),

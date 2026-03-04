@@ -1,3 +1,8 @@
+# maskedcauses 0.9.2
+
+* Save and restore graphical parameters (`par()`) in all vignettes, as
+  requested by CRAN reviewer.
+
 # maskedcauses 0.9.1
 
 * Fix Unicode characters in roxygen documentation that broke LaTeX PDF manual

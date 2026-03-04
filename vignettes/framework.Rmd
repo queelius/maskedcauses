@@ -197,7 +197,8 @@ ccp_wei <- conditional_cause_probability(model_wei)
 t_wei <- seq(0.5, 120, length.out = 200)
 probs_wei <- ccp_wei(t_wei, theta_wei)
 
-par(mfrow = c(1, 2), mar = c(4, 4, 3, 1))
+oldpar <- par(mfrow = c(1, 2), mar = c(4, 4, 3, 1))
+on.exit(par(oldpar))
 
 # Exponential
 plot(t_grid, probs_exp[, 1], type = "l", col = "steelblue", lwd = 2,

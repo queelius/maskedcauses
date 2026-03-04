@@ -515,7 +515,8 @@ for (sc_name in names(results)) {
 ### Sampling distribution visualization
 
 ```{r mc-sampling-dist, fig.width=8, fig.height=7}
-par(mfrow = c(3, 4), mar = c(4, 3, 2, 1), oma = c(0, 0, 2, 0))
+oldpar <- par(mfrow = c(3, 4), mar = c(4, 3, 2, 1), oma = c(0, 0, 2, 0))
+on.exit(par(oldpar))
 pnames <- c("k", "beta1", "beta2", "beta3")
 
 for (sc_name in names(results)) {
