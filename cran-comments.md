@@ -1,24 +1,24 @@
-## Resubmission
-
-This is a resubmission. In this version I have:
-
-* Saved and restored graphical parameters (`par()`) in all vignettes,
-  as requested by Konstanze Lauseker.
-
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 0 notes
 
-* checking for future file timestamps ... NOTE
-  unable to verify current time
+## Patch (v0.9.2 → v0.9.3)
 
-This NOTE is a transient network issue and does not indicate a package problem.
+Removed stale observed_info re-export (renamed to observed_fim in
+likelihood.model). Removed associated tests for removed generic.
+
+## Coordinated submission
+
+This is part of a coordinated 6-package submission. All packages are
+maintained by me. Updated versions being submitted simultaneously:
+
+- algebraic.dist 1.0.0
+- algebraic.mle 2.0.2
+- likelihood.model 1.0.0
+- compositional.mle 2.0.0
+- flexhaz 0.5.1
+- maskedcauses 0.9.3 (this package)
 
 ## Test environments
 
-* local: Ubuntu 24.04, R 4.3.3
-* win-builder: R-devel (2026-03-03 r89529 ucrt), 0 errors, 0 warnings, 1 note
-
-## Downstream dependencies
-
-This is the first CRAN submission. No downstream dependencies.
+* local Ubuntu 24.04, R 4.3.3

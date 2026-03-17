@@ -603,31 +603,6 @@ test_that("rdata generated data can be used with loglik", {
 
 
 # ==============================================================================
-# Tests for observed_info method
-# ==============================================================================
-
-test_that("observed_info returns a function", {
-  model <- wei_series_md_c1_c2_c3()
-  obs_info_fn <- observed_info(model)
-
-  expect_type(obs_info_fn, "closure")
-})
-
-test_that("observed_info returns correct dimensions", {
-  model <- wei_series_md_c1_c2_c3()
-  obs_info_fn <- observed_info(model)
-
-  df <- create_wei_test_data(n = 50)
-  par <- c(1.2, 100, 1.5, 150, 0.8, 200)
-
-  I_obs <- obs_info_fn(df, par)
-
-  expect_true(is.matrix(I_obs))
-  expect_equal(dim(I_obs), c(6, 6))
-})
-
-
-# ==============================================================================
 # Tests for fim method
 # ==============================================================================
 

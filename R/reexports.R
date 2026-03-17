@@ -18,10 +18,6 @@ likelihood.model::assumptions
 #' @export
 likelihood.model::fim
 
-#' @importFrom likelihood.model observed_info
-#' @export
-likelihood.model::observed_info
-
 #' @importFrom likelihood.model rdata
 #' @export
 likelihood.model::rdata
