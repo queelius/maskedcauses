@@ -220,31 +220,23 @@ generate_masked_series_data <- function(comp_lifetimes, n, m, tau, p,
   df
 }
 
-#' Create a cumulative hazard function by integrating a hazard rate
+#' Cumulative hazard function for a component hazard function
 #'
-#' Given a hazard rate function \eqn{h(t)}, returns a function computing
-#' \eqn{H(t) = \int_0^t h(u) du} via numerical integration.
+#' Creates a cumulative hazard function from a hazard function by integrating.
 #'
-#' @param haz hazard rate function \eqn{h(t, ...)}
+#' @param haz hazard function
 #' @return A function that computes the cumulative hazard at time t
 #' @importFrom stats integrate
 #' @export
 #' @examples
 #' # Exponential hazard h(t) = lambda
 #' haz <- function(t, ...) rep(0.5, length(t))
-#' H <- integrate_hazard(haz)
+#' H <- cum_haz(haz)
 #' H(2)  # Should be 1.0 (0.5 * 2)
-integrate_hazard <- function(haz) {
+cum_haz <- function(haz) {
   function(t, ...) {
     integrate(haz, lower = 0, upper = t, ...)$value
   }
-}
-
-#' @rdname integrate_hazard
-#' @usage NULL
-cum_haz <- function(haz) {
-  .Deprecated("integrate_hazard")
-  integrate_hazard(haz)
 }
 
 #' Quantile function for a component with custom survival function

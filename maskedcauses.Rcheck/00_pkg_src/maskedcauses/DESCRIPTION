@@ -1,6 +1,7 @@
 Package: maskedcauses
-Title: Likelihood Models for Systems with Masked Component Cause of Failure
-Version: 0.10.0
+Title: Likelihood Models for Systems with Masked Component Cause of
+        Failure
+Version: 0.9.3
 Authors@R: 
     person("Alexander", "Towell", , "lex@metafunctor.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-6443-9897"))
@@ -19,21 +20,15 @@ Language: en-US
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
-Suggests:
-    knitr,
-    rmarkdown,
-    testthat (>= 3.0.0),
-    algebraic.mle
+Suggests: knitr, rmarkdown, testthat (>= 3.0.0), algebraic.mle,
+        algebraic.dist
 Config/testthat/edition: 3
-Imports:
-    stats,
-    likelihood.model,
-    generics,
-    numDeriv,
-    algebraic.dist,
-    dist.structure
-Depends:
-    R (>= 4.1.0)
+Imports: stats, likelihood.model, generics, numDeriv
+Depends: R (>= 4.1.0)
 VignetteBuilder: knitr
 URL: https://queelius.github.io/maskedcauses/
 BugReports: https://github.com/queelius/maskedcauses/issues
+NeedsCompilation: no
+Packaged: 2026-03-17 14:31:30 UTC; spinoza
+Author: Alexander Towell [aut, cre] (<https://orcid.org/0000-0001-6443-9897>)
+Maintainer: Alexander Towell <lex@metafunctor.com>
