@@ -181,29 +181,39 @@ surv.exp_series <- function(t, rates, log.p = FALSE) {
 
 #' Mean function for exponential series.
 #'
-#' Computes the expected value of a series system with exponentially distributed
-#' component lifetimes. For a series system with component rates
-#' \eqn{\lambda_1, \ldots, \lambda_m}, the system lifetime is exponential
-#' with rate \eqn{\sum \lambda_j}, so \eqn{E[T] = 1 / \sum \lambda_j}.
+#' Computes the expected value of a series system with exponentially
+#' distributed component lifetimes. For a series system with component
+#' rates \eqn{\lambda_1, \ldots, \lambda_m}, the system lifetime is
+#' exponential with rate \eqn{\sum \lambda_j}, so \eqn{E[T] = 1 /
+#' \sum \lambda_j}.
 #'
-#' Equivalent to `mean(dist.structure::exp_series(rates))`.
+#' This method is polymorphic: it accepts both the legacy
+#' maskedcauses shape (a numeric vector of rates with class attribute
+#' `"exp_series"`) and the current `dist.structure::exp_series()`
+#' shape (a list with a `$total_rate` field). This prevents a breaking
+#' S3 dispatch collision when both packages are attached.
 #'
-#' @param x An object of class `exp_series` (a vector of rate parameters).
+#' @param x An `exp_series` object. Either a numeric vector of rate
+#'   parameters (legacy maskedcauses convention) or a list returned by
+#'   [dist.structure::exp_series()].
 #' @param ... Additional arguments (ignored, for S3 generic compatibility).
 #' @return The mean of the exponential series distribution (1/sum of rates).
-#' @note Preserved for backwards compatibility. New code: use
-#'   `mean(dist.structure::exp_series(rates))`.
+#' @note Preserved for backwards compatibility. New code: construct
+#'   with `dist.structure::exp_series(rates)` and call `mean()` on it.
 #' @method mean exp_series
 #' @export
 #' @examples
+#' # Legacy shape
 #' rates <- structure(c(0.5, 0.3, 0.2), class = "exp_series")
 #' mean(rates)
+#' # Modern shape (dist.structure list) works via the same method
+#' mean(dist.structure::exp_series(c(0.5, 0.3, 0.2)))
 mean.exp_series <- function(x, ...) {
-    # Inline the closed form (1 / sum_rates) to avoid S3 dispatch
-    # ambiguity: both this method and dist.structure::mean.exp_series
-    # are registered against `mean` for class "exp_series" (different
-    # underlying objects; this one takes a numeric vector with class
-    # attribute, dist.structure's takes a coherent_dist list). The math
-    # is the same; this stays compatible without recursion risk.
+    # Polymorphic: route both object shapes to the same closed form.
+    # The dist.structure list stores the aggregate rate as
+    # $total_rate; the legacy numeric vector has the rates directly.
+    if (is.list(x) && !is.null(x$total_rate)) {
+        return(1 / x$total_rate)
+    }
     1 / sum(x)
 }
