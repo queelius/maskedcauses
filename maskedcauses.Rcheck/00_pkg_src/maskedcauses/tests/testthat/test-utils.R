@@ -1,15 +1,15 @@
 # Tests for utility functions
 
 # ==============================================================================
-# Tests for integrate_hazard
+# Tests for cum_haz
 # ==============================================================================
 
-test_that("integrate_hazard creates a cumulative hazard function", {
+test_that("cum_haz creates a cumulative hazard function", {
   # Constant hazard (exponential) - must be vectorized for integrate()
   lambda <- 0.5
   haz <- function(t) rep(lambda, length(t))
 
-  ch <- integrate_hazard(haz)
+  ch <- cum_haz(haz)
 
   # Cumulative hazard should be integral of constant = lambda * t
   expect_equal(ch(1), lambda * 1, tolerance = 1e-6)
@@ -17,14 +17,14 @@ test_that("integrate_hazard creates a cumulative hazard function", {
   expect_equal(ch(5), lambda * 5, tolerance = 1e-6)
 })
 
-test_that("integrate_hazard handles Weibull hazard correctly", {
+test_that("cum_haz handles Weibull hazard correctly", {
   # Weibull hazard: h(t) = (k/lambda) * (t/lambda)^(k-1)
   k <- 2
   lambda <- 10
 
   # Vectorized hazard function
   haz <- function(t) (k / lambda) * (t / lambda)^(k - 1)
-  ch <- integrate_hazard(haz)
+  ch <- cum_haz(haz)
 
   # Weibull cumulative hazard: H(t) = (t/lambda)^k
   expected_ch <- function(t) (t / lambda)^k
@@ -34,20 +34,20 @@ test_that("integrate_hazard handles Weibull hazard correctly", {
   expect_equal(ch(10), expected_ch(10), tolerance = 1e-5)
 })
 
-test_that("integrate_hazard returns 0 at t=0", {
+test_that("cum_haz returns 0 at t=0", {
   # Vectorized constant hazard
   haz <- function(t) rep(1, length(t))
 
-  ch <- integrate_hazard(haz)
+  ch <- cum_haz(haz)
 
   expect_equal(ch(0), 0, tolerance = 1e-10)
 })
 
-test_that("integrate_hazard returns function that accepts additional arguments", {
+test_that("cum_haz returns function that accepts additional arguments", {
   # Hazard with rate parameter - vectorized
   haz <- function(t, rate) rep(rate, length(t))
 
-  ch <- integrate_hazard(haz)
+  ch <- cum_haz(haz)
 
   # Should pass rate through to hazard function
   expect_equal(ch(2, rate = 0.5), 1, tolerance = 1e-6)
@@ -259,16 +259,16 @@ test_that("rcomp with n=0 returns empty vector", {
   expect_length(samples, 0)
 })
 
-test_that("integrate_hazard at t=0 returns 0", {
+test_that("cum_haz at t=0 returns 0", {
   haz <- function(t) rep(2.0, length(t))
-  ch <- integrate_hazard(haz)
+  ch <- cum_haz(haz)
   expect_equal(ch(0), 0, tolerance = 1e-10)
 })
 
-test_that("integrate_hazard with increasing hazard", {
+test_that("cum_haz with increasing hazard", {
   # Linear hazard h(t) = t, H(t) = t^2/2
   haz <- function(t) t
-  ch <- integrate_hazard(haz)
+  ch <- cum_haz(haz)
   expect_equal(ch(2), 2, tolerance = 1e-5)
   expect_equal(ch(4), 8, tolerance = 1e-5)
 })
